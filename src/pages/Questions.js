@@ -1,28 +1,30 @@
 import { Button, CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+
 import { decode } from "html-entities";
+// React
 import { useEffect, useState } from "react";
+// Redux
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
-import useAxios from "../hooks/useAxios";
 import { handleScoreChange } from "../redux/actions";
+// router
+import { useHistory } from "react-router";
+// hooks
+import useAxios from "../hooks/useAxios";
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
 };
 
 const Questions = () => {
-  const {
-    question_category,
-    question_difficulty,
-    question_type,
-    amount_of_question,
-    score,
-  } = useSelector((state) => state);
+  // Hvatas sve podatke iz stora tacnije reducer-a
+  const { question_category, question_difficulty, question_type, amount_of_question, score } = useSelector((state) => state);
+
   const history = useHistory();
   const dispatch = useDispatch();
 
+  // Hvataj ove podatke sa API-a
   let apiUrl = `/api.php?amount=${amount_of_question}`;
   if (question_category) {
     apiUrl = apiUrl.concat(`&category=${question_category}`);
@@ -35,10 +37,19 @@ const Questions = () => {
   }
 
   const { response, loading } = useAxios({ url: apiUrl });
+
+
+  // Lokalni store???
   const [questionIndex, setQuestionIndex] = useState(0);
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
+    // console.log(response)
+    // console.log(response?.results)
+    // console.log(response.results)
+    // console.log(response?.results.length)
+    // console.log(response.results.length)
+
     if (response?.results.length) {
       const question = response.results[questionIndex];
       let answers = [...question.incorrect_answers];

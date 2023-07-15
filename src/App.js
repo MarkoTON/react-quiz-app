@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// pages
 import Settings from "./pages/Settings";
 import Questions from "./pages/Questions";
 import FinalScreen from "./pages/FinalScreen";
+// @mui
 import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 

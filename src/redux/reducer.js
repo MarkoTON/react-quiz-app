@@ -6,6 +6,7 @@ import {
   CHANGE_TYPE,
 } from "./actionsTypes";
 
+// Creating state
 const initialState = {
   question_category: "",
   question_difficulty: "",
